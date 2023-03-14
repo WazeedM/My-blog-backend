@@ -13,6 +13,9 @@ app.use(express.urlencoded({extended:true}))
 
 app.use('/blog', blogRouter);
 app.use('/auth', authRouter);
+app.use('/', (req,res)=>{
+    res.send('Welcome to my blog');
+})
 
 
 
