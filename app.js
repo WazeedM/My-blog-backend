@@ -24,9 +24,9 @@ mongoose.connect(mongoURI,{
 mongoose.connection.on('open', ()=>{
     console.log('Connected to Database...');
 })
-
-app.listen(3000, (err)=>{
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, (err)=>{
     if(!err){
-        console.log('Connected to Server on Port 3000');
+        console.log(`Connected to Server on Port ${PORT}`);
     }
 })
