@@ -16,9 +16,6 @@ app.use('/auth', authRouter);
 app.use('/', (req,res)=>{
     res.send('Welcome to my blog');
 })
-
-
-
 mongoose.set('strictQuery', true);
 mongoose.connect(mongoURI,{
     useNewUrlParser: true,
