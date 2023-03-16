@@ -68,6 +68,7 @@ router.post('/signup', async (req,res)=>{
         }
     })
     async function createUser(){
+        console.log('create user')
         const salt = await bcrypt.genSalt(10);
         await bcrypt.hash(req.body.password, salt).then(hashedPassword=>{
             if(hashedPassword){
@@ -76,6 +77,7 @@ router.post('/signup', async (req,res)=>{
         })
     
         await readersModelSchema.create(registerUserData).then(userStoreData=>{
+            console.log(userStoreData);
             if(userStoreData && userStoreData._id){
                 console.log('user data is stored', userStoreData);
                 res.json({status:'ok', data:userStoreData});
@@ -171,10 +173,10 @@ router.post('/signup', async (req,res)=>{
     }
 })
 
-router.get('/verify/:userId/:uniqueString', (req,res)=>{
+router.get('/verify/:userId/:uniqueString', async (req,res)=>{
     let {userId, uniqueString} = req.params;
     console.log('verification');
-    readerVerification.find({userId})
+    await readerVerification.find({userId})
     .then((result)=>{
         if(result.length>0){
             console.log('result', result);

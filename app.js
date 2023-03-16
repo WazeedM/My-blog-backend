@@ -3,7 +3,7 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 const mongoose = require('mongoose');
-const mongoURI = 'mongodb://127.0.0.1/readersData';
+const mongoURI = 'mongodb+srv://personal-projects:personal-projects@cluster0.jkqleim.mongodb.net/?retryWrites=true&w=majority';
 
 const authRouter = require('./routes/auth');
 const blogRouter = require('./routes/blog');
@@ -19,7 +19,7 @@ app.use('/', (req,res)=>{
 
 
 
-
+mongoose.set('strictQuery', true);
 mongoose.connect(mongoURI,{
     useNewUrlParser: true,
     useUnifiedTopology: true
