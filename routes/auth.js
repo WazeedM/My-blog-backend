@@ -110,7 +110,7 @@ router.post('/signup', async (req,res)=>{
                 link:'https//mailgen.js'
             }
         })
-        const currentURL = 'http://localhost:4200/';
+        const currentURL = 'https://weblog-wazeedm.vercel.app/';
         const uniqueString = uuidv4() + _id;
         let response = {
             body:{
@@ -378,7 +378,7 @@ router.post('/forgot-password', async (req,res)=>{
                 link:'https//mailgen.js'
             }
         })
-        const currentURL = 'http://localhost:4200/';
+        const currentURL = 'https://weblog-wazeedm.vercel.app/';
 
         let response = {
             body:{
