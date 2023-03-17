@@ -384,7 +384,7 @@ router.post('/forgot-password', async (req,res)=>{
             body:{
                 name:username,
                 action: {
-                    instructions: 'To reset your password we have created the below link, Please click and follow the instructions shown on screen to reset the password',
+                    instructions: 'To reset your password we have created the below link, Please click and follow the instructions shown on screen',
                     button: {
                         color: '#48cfad', 
                         text: 'Reset Password',
