@@ -56,7 +56,8 @@ router.post('/signup', async (req,res)=>{
         gender: req.body.gender,
         dob: req.body.dob,
         password: req.body.password,
-        verified: false
+        verified: false,
+        subscription: req.body.email_subscription
     }
 
     await readersModelSchema.findOne({email:registerUserData.email}).then(exists=>{
