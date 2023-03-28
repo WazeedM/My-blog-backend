@@ -267,13 +267,20 @@ router.get('/verify/:userId/:uniqueString', async (req,res)=>{
     })
 
 })
-
-
-router.get('/dashboard', verifyToken, async (req,res)=>{
-    if(req && req.decodedToken){
-        res.json({status:'ok', data:'ok'})
+router.get('/getReaders', async (req,res)=>{
+    try {
+        let readers = await readersModelSchema.find();
+        res.json({
+            data:readers,
+            message:'readers fetched successfully'
+        })
+    } catch (error) {
+        res.json({
+            data:error
+        })
     }
 })
+
 router.post('/reset-password/:resetToken', async (req,res)=>{
     try{
         const {resetToken} = req.params;
