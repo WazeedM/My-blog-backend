@@ -56,7 +56,8 @@ router.post('/signup', async (req,res)=>{
         gender: req.body.gender,
         dob: req.body.dob,
         password: req.body.password,
-        verified: false
+        verified: false,
+        subscription: req.body.email_subscription
     }
 
     await readersModelSchema.findOne({email:registerUserData.email}).then(exists=>{
@@ -110,7 +111,7 @@ router.post('/signup', async (req,res)=>{
                 link:'https//mailgen.js'
             }
         })
-        const currentURL = 'http://localhost:4200/';
+        const currentURL = 'https://weblog-wazeedm.vercel.app/';
         const uniqueString = uuidv4() + _id;
         let response = {
             body:{
@@ -266,13 +267,20 @@ router.get('/verify/:userId/:uniqueString', async (req,res)=>{
     })
 
 })
-
-
-router.get('/dashboard', verifyToken, async (req,res)=>{
-    if(req && req.decodedToken){
-        res.json({status:'ok', data:'ok'})
+router.get('/getReaders', async (req,res)=>{
+    try {
+        let readers = await readersModelSchema.find();
+        res.json({
+            data:readers,
+            message:'readers fetched successfully'
+        })
+    } catch (error) {
+        res.json({
+            data:error
+        })
     }
 })
+
 router.post('/reset-password/:resetToken', async (req,res)=>{
     try{
         const {resetToken} = req.params;
@@ -378,13 +386,13 @@ router.post('/forgot-password', async (req,res)=>{
                 link:'https//mailgen.js'
             }
         })
-        const currentURL = 'http://localhost:4200/';
+        const currentURL = 'https://weblog-wazeedm.vercel.app/';
 
         let response = {
             body:{
                 name:username,
                 action: {
-                    instructions: 'To reset your password we have created the below link, Please click and follow the instructions shown on screen to reset the password',
+                    instructions: 'To reset your password we have created the below link, Please click and follow the instructions shown on screen',
                     button: {
                         color: '#48cfad', 
                         text: 'Reset Password',

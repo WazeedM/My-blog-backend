@@ -7,18 +7,18 @@ const mongoURI = 'mongodb+srv://personal-projects:personal-projects@cluster0.jkq
 
 const authRouter = require('./routes/auth');
 const blogRouter = require('./routes/blog');
+const blogCountRouter = require('./routes/blogCount');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
 app.use('/blog', blogRouter);
 app.use('/auth', authRouter);
+app.use('/blogs', blogCountRouter);
+
 app.use('/', (req,res)=>{
     res.send('Welcome to my blog');
 })
-
-
-
 mongoose.set('strictQuery', true);
 mongoose.connect(mongoURI,{
     useNewUrlParser: true,
@@ -27,9 +27,9 @@ mongoose.connect(mongoURI,{
 mongoose.connection.on('open', ()=>{
     console.log('Connected to Database...');
 })
-
-app.listen(3000, (err)=>{
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, (err)=>{
     if(!err){
-        console.log('Connected to Server on Port 3000');
+        console.log(`Connected to Server on Port ${PORT}`);
     }
 })

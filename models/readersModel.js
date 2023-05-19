@@ -27,6 +27,10 @@ const readersSchema = new mongoose.Schema({
     resetToken:{
         type: String,
         default:''
+    },
+    subscription:{
+        type: Boolean,
+        default: false
     }
 })
 module.exports = mongoose.model('readersModel', readersSchema);
